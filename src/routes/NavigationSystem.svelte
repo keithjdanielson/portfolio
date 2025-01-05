@@ -7,19 +7,17 @@
 
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
-	import { goto } from '$app/navigation';
 
 	let initialLoad = true;
 	let activeSection: string | null = null;
 	let mainContainer: HTMLElement;
 	let isAnimating = false;
 	const NAV_HEIGHT = 48;
-	const SCROLL_ATTEMPTS_NEEDED = 1;
 
 	let scrollNewSectionAttempts = 0;
 	const SCROLL_SENSITIVITY = 13; // Increase this number to require more scrolling
 	let lastWheelTimestamp = 0;
-	const SCROLL_COOLDOWN = 500; // Time in ms before accepting another scroll event
+	const SCROLL_COOLDOWN = 750; // Time in ms before accepting another scroll event
 
 	const sections = [
 		{ id: 'about', name: 'About Me', color: 'bg-one', content: AboutContent },
@@ -69,18 +67,17 @@
 		if (now - lastWheelTimestamp < SCROLL_COOLDOWN) return;
 
 		const nextSection = getNextSection(direction);
-		// event.preventDefault();
 		lastWheelTimestamp = now;
 
 		if (nextSection) {
-			if (scrollNewSectionAttempts < SCROLL_ATTEMPTS_NEEDED) {
-				scrollNewSectionAttempts++;
-				return;
-			}
 			scrollNewSectionAttempts = 0;
+			event.preventDefault();
+			console.warn('toggleSection: ', nextSection);
 			toggleSection(nextSection);
 		} else if (direction === 'up' && activeSection) {
+			event.preventDefault();
 			animateToBottom(null);
+			window.history.pushState(null, '', '#');
 		}
 	}
 
@@ -304,7 +301,7 @@
 	});
 </script>
 
-<div class="relative min-h-screen bg-background" bind:this={mainContainer}>
+<div class="relative min-h-dvh bg-background" bind:this={mainContainer}>
 	<!-- Home Content -->
 	<HomeContent />
 
