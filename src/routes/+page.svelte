@@ -2,6 +2,6 @@
 	import NavigationSystem from './NavigationSystem.svelte';
 </script>
 
-<div class="bg-background relative min-h-screen">
+<div class="relative min-h-screen bg-background">
 	<NavigationSystem />
 </div>

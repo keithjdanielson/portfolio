@@ -9,7 +9,7 @@
 		<!-- Text content section -->
 		<div class="px-4">
 			<h1
-				class="font-headers text-pretty text-7xl tracking-tight sm:text-9xl lg:text-7xl xl:text-8xl 2xl:text-9xl"
+				class="text-pretty font-headers text-7xl tracking-tight sm:text-9xl lg:text-7xl xl:text-8xl 2xl:text-9xl"
 				id="page-title"
 			>
 				<!-- Added aria-label for better screen reader pronunciation if needed -->

@@ -311,13 +311,13 @@
 	<HomeContent />
 
 	<!-- Section Cards -->
-	{#each sections as section}
+	{#each sections as section, index}
 		<div
 			id="card-{section.id}"
 			class="absolute inset-x-0 min-h-screen {section.color} transform"
 			style="transform: translateY(100vh);"
 		>
-			<div class="card-content pt-12">
+			<div class="card-content" style="padding-top: {(index + 1) * 48}px;">
 				<svelte:component this={section.content} />
 			</div>
 		</div>
@@ -325,11 +325,7 @@
 
 	<!-- Navigation Items -->
 	{#each sections as section}
-		<div
-			id="nav-{section.id}"
-			class="absolute left-0 w-full {section.color} z-10"
-			style="padding-bottom: env(safe-area-inset-bottom);"
-		>
+		<div id="nav-{section.id}" class="absolute left-0 w-full {section.color} z-10">
 			<div class="p-3">
 				<button
 					class="block w-full text-left font-secondary text-background"

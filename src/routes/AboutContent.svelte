@@ -11,10 +11,10 @@
 		</div>
 
 		<!-- Content section (right) -->
-		<div class="font-secondary mx-auto space-y-16 lg:w-1/2">
+		<div class="mx-auto space-y-16 font-secondary lg:w-1/2">
 			<!-- <h1 class="font-headers text-background text-8xl">About</h1> -->
 
-			<div class="text-background space-y-8 text-xl lg:space-y-4 xl:text-2xl">
+			<div class="space-y-8 text-xl text-background lg:space-y-4 xl:text-2xl">
 				<p class="font-secondary transition-colors duration-200 hover:text-white">
 					I CREATE <strong>THOUGHTFUL</strong> WEB APPLICATIONS <br /> THAT BLEND<br />
 					ACCESSIBILITY,<br />
