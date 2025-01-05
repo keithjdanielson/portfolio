@@ -68,18 +68,16 @@
 
 		if (now - lastWheelTimestamp < SCROLL_COOLDOWN) return;
 
-		console.warn('scroll attempt hit: ', scrollNewSectionAttempts);
-		if (scrollNewSectionAttempts < SCROLL_ATTEMPTS_NEEDED) {
-			scrollNewSectionAttempts++;
-			return;
-		}
-		scrollNewSectionAttempts = 0;
-
 		const nextSection = getNextSection(direction);
-		event.preventDefault();
+		// event.preventDefault();
 		lastWheelTimestamp = now;
 
 		if (nextSection) {
+			if (scrollNewSectionAttempts < SCROLL_ATTEMPTS_NEEDED) {
+				scrollNewSectionAttempts++;
+				return;
+			}
+			scrollNewSectionAttempts = 0;
 			toggleSection(nextSection);
 		} else if (direction === 'up' && activeSection) {
 			animateToBottom(null);
