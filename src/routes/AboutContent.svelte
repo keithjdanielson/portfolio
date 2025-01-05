@@ -6,11 +6,11 @@
 		</div>
 
 		<!-- Content section (right) -->
-		<div class="mx-auto space-y-16 lg:w-1/2">
+		<div class="font-secondary mx-auto space-y-16 lg:w-1/2">
 			<!-- <h1 class="font-headers text-background text-8xl">About</h1> -->
 
 			<div class="text-background space-y-10 text-lg lg:text-xl xl:space-y-12 xl:text-2xl">
-				<p class="transition-colors duration-200 hover:text-white">
+				<p class="font-secondary transition-colors duration-200 hover:text-white">
 					I CREATE <strong>THOUGHTFUL</strong> WEB APPLICATIONS <br /> THAT BLEND<br />
 					ACCESSIBILITY,<br />
 					PERFORMANCE,<br />
