@@ -7,7 +7,9 @@
 
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
+	import { goto } from '$app/navigation';
 
+	let initialLoad = true;
 	let activeSection: string | null = null;
 	let mainContainer: HTMLElement;
 	let isAnimating = false;
@@ -240,15 +242,32 @@
 		activeSection = sectionId;
 	}
 
-	function toggleSection(sectionId: string) {
-		if (activeSection === sectionId) {
-			animateToBottom(null);
-		} else {
-			animateToTop(sectionId);
+	function handleHashChange() {
+		const hash = window.location.hash.slice(1);
+		if (hash && sections.some((s) => s.id === hash)) {
+			toggleSection(hash);
 		}
 	}
 
+	function toggleSection(sectionId: string) {
+		if (!initialLoad && activeSection === sectionId) {
+			window.history.pushState(null, '', '#');
+			animateToBottom(null);
+		} else {
+			window.history.pushState(null, '', `#${sectionId}`);
+			animateToTop(sectionId);
+		}
+		initialLoad = false;
+	}
+
 	onMount(() => {
+		const hash = window.location.hash.slice(1);
+		if (hash && sections.some((s) => s.id === hash)) {
+			initialLoad = true;
+			toggleSection(hash);
+		}
+
+		window.addEventListener('hashchange', handleHashChange);
 		// Initialize home content to visible
 		const homeContent = document.querySelector('.home-content');
 		if (homeContent) {
@@ -273,6 +292,7 @@
 
 		return () => {
 			mainContainer.removeEventListener('wheel', handleWheel);
+			window.removeEventListener('hashchange', handleHashChange);
 		};
 	});
 </script>
