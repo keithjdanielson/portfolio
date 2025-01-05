@@ -2,11 +2,11 @@
 	import projects from '$lib/data/projects';
 </script>
 
-<div class="mt-20 px-8 pt-6">
-	<ul role="list" class="grid grid-cols-1 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-2 xl:gap-x-8">
+<div class="mt-20 overflow-y-visible pt-6 sm:px-8">
+	<ul role="list" class="grid grid-cols-1 gap-x-4 sm:gap-x-6 sm:gap-y-8 lg:grid-cols-2 xl:gap-x-8">
 		{#each projects as project}
-			<li class="bg-two relative rounded-lg p-8">
-				<h2 class="font-secondary text-background flex justify-between pb-2 text-4xl">
+			<li class="bg-two relative p-8 sm:rounded-lg">
+				<h2 class="font-secondary text-background flex justify-between pb-2 text-3xl sm:text-4xl">
 					<span>{project.name}</span>
 					<span class="font-light">{project.date}</span>
 				</h2>

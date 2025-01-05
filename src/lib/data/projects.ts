@@ -23,7 +23,7 @@ const projects = [
 		]
 	},
 	{
-		name: '2D Sidescroller',
+		name: '2D Game',
 		url: 'https://gx.games/games/q4kciu/scouts-night-out/',
 		date: '2022',
 		imagePath: '/ScoutsNightOut.png',

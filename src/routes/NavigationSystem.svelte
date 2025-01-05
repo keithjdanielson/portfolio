@@ -40,37 +40,47 @@
 	function handleWheel(event: WheelEvent) {
 		if (isAnimating) return;
 
-		if (window.innerWidth <= 1024) {
-			return;
-		}
-
-		// Get current timestamp
 		const now = Date.now();
-
-		// Accumulate scroll until threshold
 		const scrollDelta = Math.abs(event.deltaY);
-
-		// Only trigger if scroll is significant enough
-		if (scrollDelta < SCROLL_SENSITIVITY) {
-			return;
-		}
+		if (scrollDelta < SCROLL_SENSITIVITY) return;
 
 		const direction = event.deltaY > 0 ? 'down' : 'up';
-		const nextSection = getNextSection(direction);
+		const activeElement = activeSection
+			? document.querySelector(`#card-${activeSection} .card-content`)
+			: null;
 
-		// Check if we've waited long enough since last scroll
-		if (now - lastWheelTimestamp < SCROLL_COOLDOWN && nextSection !== null) {
+		if (!activeElement) {
+			handleHomeScroll(direction, now, event);
 			return;
 		}
 
-		if (nextSection !== null) {
-			event.preventDefault();
-			lastWheelTimestamp = now; // Record timestamp of this scroll
+		const { scrollTop, scrollHeight, clientHeight } = activeElement;
+		const isAtBottom = scrollHeight - scrollTop <= clientHeight + 1;
+		const isAtTop = scrollTop === 0;
+
+		if ((direction === 'down' && !isAtBottom) || (direction === 'up' && !isAtTop)) {
+			return;
+		}
+
+		if (now - lastWheelTimestamp < SCROLL_COOLDOWN) return;
+
+		const nextSection = getNextSection(direction);
+		event.preventDefault();
+		lastWheelTimestamp = now;
+
+		if (nextSection) {
 			toggleSection(nextSection);
 		} else if (direction === 'up' && activeSection) {
-			event.preventDefault();
-			lastWheelTimestamp = now; // Record timestamp of this scroll
 			animateToBottom(null);
+		}
+	}
+
+	function handleHomeScroll(direction: 'up' | 'down', now: number, event: WheelEvent) {
+		const nextSection = getNextSection(direction);
+		if (nextSection && now - lastWheelTimestamp >= SCROLL_COOLDOWN) {
+			event.preventDefault();
+			lastWheelTimestamp = now;
+			toggleSection(nextSection);
 		}
 	}
 
@@ -267,7 +277,7 @@
 	});
 </script>
 
-<div class="bg-background relative min-h-screen overflow-hidden" bind:this={mainContainer}>
+<div class="bg-background relative min-h-screen" bind:this={mainContainer}>
 	<!-- Home Content -->
 	<HomeContent />
 
@@ -278,7 +288,7 @@
 			class="absolute inset-x-0 min-h-screen {section.color} transform"
 			style="transform: translateY(100vh);"
 		>
-			<div class="pt-12">
+			<div class="card-content pt-12">
 				<svelte:component this={section.content} />
 			</div>
 		</div>
@@ -302,5 +312,12 @@
 <style>
 	:global(body) {
 		overflow: hidden;
+	}
+
+	/* Add to your style block */
+	:global(.card-content) {
+		max-height: calc(100vh - 48px);
+		overflow-y: auto;
+		height: calc(100vh - 48px);
 	}
 </style>

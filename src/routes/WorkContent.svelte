@@ -48,16 +48,16 @@
 			</div>
 		</div>
 		<div class="xl:max-w-8xl flex">
-			<div class="flex w-32 items-center justify-center">
+			<div class="flex items-center justify-center sm:w-32">
 				<span
-					class="font-headers text-background -rotate-90 transform whitespace-nowrap text-8xl font-bold transition-colors duration-200 hover:text-white xl:text-9xl"
+					class="font-headers text-background hidden -rotate-90 transform whitespace-nowrap text-8xl font-bold transition-colors duration-200 hover:text-white sm:block xl:text-9xl"
 					>Skills</span
 				>
 			</div>
-			<div class="pl-8 xl:max-w-7xl">
-				<div class="grid grid-cols-2 gap-6">
+			<div class="sm:pl-8 xl:max-w-7xl">
+				<div class="grid grid-cols-1 sm:grid-cols-1 sm:gap-6">
 					{#each Object.entries(skills) as [category, skillList]}
-						<div class="bg-background rounded-lg p-4">
+						<div class="bg-background p-4 sm:rounded-lg">
 							<span class="font-secondary mb-3 block text-2xl text-black">
 								{category}
 							</span>
