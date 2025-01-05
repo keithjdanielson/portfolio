@@ -2,7 +2,7 @@
 	import HomeContent from './HomeContent.svelte';
 	import AboutContent from './AboutContent.svelte';
 	import WorkContent from './WorkContent.svelte';
-	import SkillsContent from './SkillsContent.svelte';
+	import ProjectsContent from './ProjectsContent.svelte';
 	import ContactContent from './ContactContent.svelte';
 
 	import { onMount } from 'svelte';
@@ -19,8 +19,8 @@
 
 	const sections = [
 		{ id: 'about', name: 'About Me', color: 'bg-one', content: AboutContent },
-		{ id: 'work', name: 'Work', color: 'bg-two', content: WorkContent },
-		{ id: 'skills', name: 'Skills', color: 'bg-three', content: SkillsContent },
+		{ id: 'experience', name: 'Experience', color: 'bg-two', content: WorkContent },
+		{ id: 'projects', name: 'Projects', color: 'bg-three', content: ProjectsContent },
 		{ id: 'contact', name: 'Contact', color: 'bg-four', content: ContactContent }
 	];
 
@@ -278,7 +278,7 @@
 			class="absolute inset-x-0 min-h-screen {section.color} transform"
 			style="transform: translateY(100vh);"
 		>
-			<div class="px-3 pt-12">
+			<div class="pt-12">
 				<svelte:component this={section.content} />
 			</div>
 		</div>
@@ -289,7 +289,7 @@
 		<div id="nav-{section.id}" class="absolute left-0 w-full {section.color} z-10">
 			<div class="p-3">
 				<button
-					class="text-background font-headers block w-full text-left"
+					class="text-background font-secondary block w-full text-left"
 					on:click={() => toggleSection(section.id)}
 				>
 					{section.name}

@@ -18,8 +18,12 @@ export default {
 				// two: '#6f5e53',
 				// three: '#8a7968',
 				// four: '#593d3b',
-				one: '#4A3E37',
-				two: '#6f5e53',
+
+				// one: '#4A3E37',
+				one: '#3D352E',
+
+				// two: '#6f5e53', original
+				two: '#5b4f47',
 				three: '#8a7968',
 				four: '#593d3b',
 
