@@ -24,7 +24,7 @@
 						<img
 							src={project.imagePath}
 							alt=""
-							class="aspect-[8/5] object-cover group-hover:opacity-90"
+							class="aspect-[8/4] object-cover group-hover:opacity-90"
 						/>
 					</a>
 				</div>
