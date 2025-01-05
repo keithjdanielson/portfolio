@@ -6,7 +6,7 @@
 	<ul role="list" class="grid grid-cols-1 gap-x-4 sm:gap-x-6 sm:gap-y-8 lg:grid-cols-2 xl:gap-x-8">
 		{#each projects as project}
 			<li class="bg-two relative p-8 sm:rounded-lg">
-				<h2 class="font-secondary text-background flex justify-between pb-2 text-3xl sm:text-4xl">
+				<h2 class="font-headers text-background flex justify-between pb-2 text-3xl sm:text-4xl">
 					<span>{project.name}</span>
 					<span class="font-light">{project.date}</span>
 				</h2>

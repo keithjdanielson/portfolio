@@ -1,5 +1,5 @@
 <div class="mt-20 pt-16">
-	<div class="flex h-screen flex-col items-center space-y-16">
+	<div class="flex flex-col items-center space-y-16" style="height: calc(100vh - 240px);">
 		<h1 class="font-headers text-background pt-16 text-4xl sm:text-8xl lg:text-[170px]">
 			reach me at
 		</h1>
@@ -23,11 +23,7 @@
 			</h2>
 
 			<h2 class="font-headers text-background flex items-center text-xl underline sm:text-2xl">
-				<a
-					href="https://github.com/keithjdanielson"
-					target="_blank"
-					class="text-background flex items-center"
-				>
+				<a href="https://github.com/keithjdanielson" target="_blank" class="flex items-center">
 					Github
 				</a>
 			</h2>

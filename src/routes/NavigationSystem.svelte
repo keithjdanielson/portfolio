@@ -14,7 +14,9 @@
 	let mainContainer: HTMLElement;
 	let isAnimating = false;
 	const NAV_HEIGHT = 48;
+	const SCROLL_ATTEMPTS_NEEDED = 1;
 
+	let scrollNewSectionAttempts = 0;
 	const SCROLL_SENSITIVITY = 13; // Increase this number to require more scrolling
 	let lastWheelTimestamp = 0;
 	const SCROLL_COOLDOWN = 500; // Time in ms before accepting another scroll event
@@ -65,6 +67,13 @@
 		}
 
 		if (now - lastWheelTimestamp < SCROLL_COOLDOWN) return;
+
+		console.warn('scroll attempt hit: ', scrollNewSectionAttempts);
+		if (scrollNewSectionAttempts < SCROLL_ATTEMPTS_NEEDED) {
+			scrollNewSectionAttempts++;
+			return;
+		}
+		scrollNewSectionAttempts = 0;
 
 		const nextSection = getNextSection(direction);
 		event.preventDefault();

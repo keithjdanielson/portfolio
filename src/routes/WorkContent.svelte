@@ -8,7 +8,7 @@
 		<div class="flex">
 			<div class="sm:flex sm:w-32 sm:items-center sm:justify-center">
 				<span
-					class="font-headers text-background hidden -rotate-90 transform whitespace-nowrap text-8xl font-bold transition-colors duration-200 hover:text-white sm:block xl:text-9xl"
+					class="font-headers text-background hidden -rotate-90 transform whitespace-nowrap text-7xl font-bold transition-colors duration-200 hover:text-white sm:block xl:text-9xl"
 					>Jobs</span
 				>
 			</div>
@@ -50,18 +50,18 @@
 		<div class="xl:max-w-8xl flex">
 			<div class="flex items-center justify-center sm:w-32">
 				<span
-					class="font-headers text-background hidden -rotate-90 transform whitespace-nowrap text-8xl font-bold transition-colors duration-200 hover:text-white sm:block xl:text-9xl"
+					class="font-headers text-background hidden -rotate-90 transform whitespace-nowrap text-7xl font-bold transition-colors duration-200 hover:text-white sm:block xl:text-9xl"
 					>Skills</span
 				>
 			</div>
-			<div class="sm:pl-8 xl:max-w-7xl">
-				<div class="grid grid-cols-1 sm:grid-cols-1 sm:gap-6">
+			<div class="pb-12 sm:pl-8 xl:max-w-7xl xl:pb-0">
+				<div class="grid grid-cols-1 xl:grid-cols-2 xl:gap-6">
 					{#each Object.entries(skills) as [category, skillList]}
-						<div class="bg-background p-4 sm:rounded-lg">
+						<div class="bg-background p-4 xl:rounded-lg">
 							<span class="font-secondary mb-3 block text-2xl text-black">
 								{category}
 							</span>
-							<div class="flex flex-wrap gap-2 xl:max-w-2xl">
+							<div class="flex flex-wrap gap-2 xl:max-w-3xl">
 								{#each skillList as skill}
 									<div
 										class="text-background bg-two hover:bg-one cursor-default rounded-full px-3 py-1 text-lg transition-colors duration-200 hover:text-white"

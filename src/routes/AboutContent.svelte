@@ -1,15 +1,20 @@
 <div class="relative overflow-hidden">
 	<div class="flex">
 		<!-- Image section (left) -->
-		<div class="hidden w-2/5 lg:block">
-			<img src="/KeithPalace.png" alt="Keith Danielson" class="h-screen w-full object-cover" />
+		<div class="pr-4 sm:w-2/5">
+			<img
+				src="/KeithPalace.png"
+				alt="Keith Danielson"
+				class="object-cover sm:h-screen sm:w-full"
+				style="height: calc(100vh - 144px);"
+			/>
 		</div>
 
 		<!-- Content section (right) -->
 		<div class="font-secondary mx-auto space-y-16 lg:w-1/2">
 			<!-- <h1 class="font-headers text-background text-8xl">About</h1> -->
 
-			<div class="text-background space-y-10 text-lg lg:text-xl xl:space-y-12 xl:text-2xl">
+			<div class="text-background space-y-8 text-xl lg:space-y-4 xl:text-2xl">
 				<p class="font-secondary transition-colors duration-200 hover:text-white">
 					I CREATE <strong>THOUGHTFUL</strong> WEB APPLICATIONS <br /> THAT BLEND<br />
 					ACCESSIBILITY,<br />
@@ -18,27 +23,27 @@
 					FOR A <strong>USER</strong> FOCUSED EXPERIENCE.
 				</p>
 
-				<div class="xl:flex xl:justify-center">
-					<p class="w-1/2 text-pretty transition-colors duration-200 hover:text-white">
+				<div class="sm:flex sm:justify-center">
+					<p class="text-pretty transition-colors duration-200 hover:text-white sm:w-1/2">
 						<strong>LEARNING</strong> AND <strong>GROWING</strong> AS A DEVELOPER DRIVES MY PASSION FOR
 						THE CRAFT.
 					</p>
 				</div>
 
-				<div class="xl:flex xl:justify-end">
-					<p class="w-1/2 transition-colors duration-200 hover:text-white">
+				<div class="sm:flex sm:justify-end">
+					<p class="transition-colors duration-200 hover:text-white sm:w-1/2">
 						CURRENTLY, I'M AT <strong>CACI</strong> IN COLORADO, <br /> WHERE I FOCUS ON DESIGN, FRONT
 						END, AND BUILDING APIS.
 					</p>
 				</div>
 
-				<p class="w-1/2 transition-colors duration-200 hover:text-white">
+				<p class="transition-colors duration-200 hover:text-white sm:w-1/2">
 					I LOVE TO MAKE <strong>STUFF</strong>. BEYOND CODING, I'M PASSIONATE ABOUT SYNTHESIZERS,
 					WOODWORK, AND FASHION. <br /> YOU CAN CHECK OUT SOME OF MY MUSIC
 					<strong>HERE</strong>.
 				</p>
 
-				<div class="xl:flex xl:justify-end">
+				<div class="sm:flex sm:justify-end">
 					<button class="w-1/2 text-left underline transition-colors duration-200 hover:text-white">
 						MY RESUME
 					</button>
