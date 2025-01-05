@@ -306,7 +306,7 @@
 	});
 </script>
 
-<div class="bg-background relative min-h-screen" bind:this={mainContainer}>
+<div class="relative min-h-screen bg-background" bind:this={mainContainer}>
 	<!-- Home Content -->
 	<HomeContent />
 
@@ -328,7 +328,7 @@
 		<div id="nav-{section.id}" class="absolute left-0 w-full {section.color} z-10">
 			<div class="p-3">
 				<button
-					class="text-background font-secondary block w-full text-left"
+					class="block w-full text-left font-secondary text-background"
 					on:click={() => toggleSection(section.id)}
 				>
 					{section.name}
