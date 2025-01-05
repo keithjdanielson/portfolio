@@ -325,7 +325,11 @@
 
 	<!-- Navigation Items -->
 	{#each sections as section}
-		<div id="nav-{section.id}" class="absolute left-0 w-full {section.color} z-10">
+		<div
+			id="nav-{section.id}"
+			class="absolute left-0 w-full {section.color} z-10"
+			style="padding-bottom: env(safe-area-inset-bottom);"
+		>
 			<div class="p-3">
 				<button
 					class="block w-full text-left font-secondary text-background"
@@ -343,7 +347,6 @@
 		overflow: hidden;
 	}
 
-	/* Add to your style block */
 	:global(.card-content) {
 		max-height: calc(100vh - 48px);
 		overflow-y: auto;
