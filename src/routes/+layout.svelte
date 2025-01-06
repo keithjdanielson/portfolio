@@ -378,7 +378,7 @@
 			class="absolute inset-x-0 min-h-screen {section.color} transform"
 			style="transform: translateY(100vh);"
 		>
-			<div class="card-content pb-16 sm:pb-0" style="padding-top: {(index + 1) * 48}px;">
+			<div class="card-content" style="padding-top: {(index + 1) * 48}px;">
 				<svelte:component this={section.content} />
 			</div>
 		</div>
@@ -409,6 +409,6 @@
 		height: calc(100dvh - 48px);
 		overflow-y: auto;
 		/* Add padding to ensure content is reachable */
-		/* padding-bottom: max(env(safe-area-inset-bottom), 24px); */
+		padding-bottom: max(env(safe-area-inset-bottom), 24px);
 	}
 </style>
