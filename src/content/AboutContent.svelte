@@ -1,4 +1,4 @@
-<div class="relative overflow-hidden">
+<div class="relative">
 	<div class="flex">
 		<!-- Image section (left) -->
 		<div class="pr-4 sm:w-2/5">
@@ -6,7 +6,7 @@
 				src="/KeithPalace.webp"
 				alt="Keith Danielson"
 				class="object-cover sm:h-screen sm:w-full"
-				style="height: calc(100vh - 144px);"
+				style="height: calc(100vh - 192px);"
 			/>
 		</div>
 

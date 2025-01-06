@@ -286,11 +286,7 @@
 
 	<!-- Combined Section Elements -->
 	{#each sections as section, index}
-		<div
-			id="section-{section.id}"
-			class="absolute inset-x-0"
-			style="transform: translateY({index * NAV_HEIGHT}px);"
-		>
+		<div id="section-{section.id}" class="section absolute inset-x-0">
 			<!-- Nav part -->
 			<div class="w-full {section.color} z-10">
 				<div class="p-3">
@@ -304,8 +300,11 @@
 			</div>
 
 			<!-- Content part -->
-			<div class="min-h-screen {section.color}">
-				<div class="card-content">
+			<div class={section.color}>
+				<div
+					class="card-content overflow-y-auto"
+					style="height: calc(100dvh - {NAV_HEIGHT * sections.length}px);"
+				>
 					<svelte:component this={section.content} />
 				</div>
 			</div>
@@ -316,12 +315,5 @@
 <style>
 	:global(body) {
 		overflow: hidden;
-	}
-
-	:global(.card-content) {
-		max-height: calc(100dvh - 48px);
-		height: calc(100dvh - 48px);
-		overflow-y: auto;
-		padding-bottom: max(env(safe-area-inset-bottom), 24px);
 	}
 </style>
