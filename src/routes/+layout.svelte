@@ -9,6 +9,9 @@
 	import WorkContent from '../content/WorkContent.svelte';
 	import ProjectsContent from '../content/ProjectsContent.svelte';
 	import ContactContent from '../content/ContactContent.svelte';
+	import { browser } from '$app/environment';
+
+	export let data;
 
 	let loading = true;
 
@@ -23,32 +26,15 @@
 	let lastWheelTimestamp = 0;
 	const SCROLL_COOLDOWN = 750;
 
-	const sections = [
-		{
-			id: 'about',
-			name: 'About Me',
-			color: 'bg-one',
-			content: AboutContent
-		},
-		{
-			id: 'experience',
-			name: 'Experience',
-			color: 'bg-two',
-			content: WorkContent
-		},
-		{
-			id: 'projects',
-			name: 'Projects',
-			color: 'bg-three',
-			content: ProjectsContent
-		},
-		{
-			id: 'contact',
-			name: 'Contact',
-			color: 'bg-four',
-			content: ContactContent
-		}
-	];
+	const sections = data.sections.map((section) => ({
+		...section,
+		content: {
+			about: AboutContent,
+			experience: WorkContent,
+			projects: ProjectsContent,
+			contact: ContactContent
+		}[section.id]
+	}));
 
 	function setImmediatePositions(activeSectionId: string | null) {
 		if (!mainContainer) return;
@@ -251,7 +237,6 @@
 	}
 
 	onMount(() => {
-		loading = true;
 		const currentPath = $page.url.pathname;
 		const sectionId = currentPath.slice(1);
 		// Set initial positions immediately without animation
@@ -320,7 +305,7 @@
 
 			<!-- Content part -->
 			<div class="min-h-screen {section.color}">
-				<div class="card-content" style="padding-top: {NAV_HEIGHT}px;">
+				<div class="card-content">
 					<svelte:component this={section.content} />
 				</div>
 			</div>
