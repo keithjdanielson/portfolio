@@ -1,8 +1,6 @@
 <div>
-	<div class="flex flex-col items-center space-y-16" style="height: calc(100vh - 240px);">
-		<h1 class="pt-16 font-headers text-4xl text-background sm:text-8xl lg:text-[170px]">
-			reach me at
-		</h1>
+	<div class="flex flex-col items-center space-y-16">
+		<h1 class="font-headers text-4xl text-background sm:text-8xl lg:text-[170px]">reach me at</h1>
 
 		<!-- Email link -->
 		<h2 class="font-headers text-2xl text-background sm:text-4xl md:text-5xl lg:text-7xl">
