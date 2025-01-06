@@ -3,7 +3,7 @@
 		<!-- Image section (left) -->
 		<div class="pr-4 sm:w-2/5">
 			<img
-				src="/KeithPalace.png"
+				src="/KeithPalace.webp"
 				alt="Keith Danielson"
 				class="object-cover sm:h-screen sm:w-full"
 				style="height: calc(100vh - 144px);"
