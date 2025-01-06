@@ -44,9 +44,13 @@
 				</p>
 
 				<div class="sm:flex sm:justify-end">
-					<button class="w-1/2 text-left underline transition-colors duration-200 hover:text-white">
+					<a
+						href="/Keith_Danielson_Resume.pdf"
+						download="Keith_Danielson_Resume.pdf"
+						class="w-1/2 text-left underline transition-colors duration-200 hover:text-white"
+					>
 						MY RESUME
-					</button>
+					</a>
 				</div>
 			</div>
 		</div>
