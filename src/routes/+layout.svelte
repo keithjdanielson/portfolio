@@ -10,10 +10,13 @@
 	import ProjectsContent from '../content/ProjectsContent.svelte';
 	import ContactContent from '../content/ContactContent.svelte';
 
+	let loading = true;
+
 	let mainContainer: HTMLElement;
 	let isAnimating = false;
 	let activeSection: string | null = null;
 	const NAV_HEIGHT = 48;
+	const ANIMATION_DURATION = 0.5;
 
 	let scrollNewSectionAttempts = 0;
 	const SCROLL_SENSITIVITY = 13;
@@ -47,6 +50,27 @@
 		}
 	];
 
+	function setImmediatePositions(activeSectionId: string | null) {
+		if (!mainContainer) return;
+
+		const bottomPosition = mainContainer.offsetHeight;
+		const activeIndex = activeSectionId ? sections.findIndex((s) => s.id === activeSectionId) : -1;
+
+		sections.forEach((section, index) => {
+			const sectionEl = document.getElementById(`section-${section.id}`);
+			if (sectionEl) {
+				if (activeSectionId && index <= activeIndex) {
+					sectionEl.style.transform = `translateY(${index * NAV_HEIGHT}px)`;
+				} else {
+					sectionEl.style.transform = `translateY(${
+						bottomPosition - (sections.length - index) * NAV_HEIGHT
+					}px)`;
+				}
+			}
+		});
+	}
+
+	// Your existing getNextSection function remains the same
 	function getNextSection(direction: 'up' | 'down'): string | null {
 		if (!activeSection) {
 			return direction === 'down' ? sections[0].id : null;
@@ -60,38 +84,8 @@
 		}
 	}
 
-	// async function navigateToSection(sectionId: string | null) {
-	// 	if (sectionId === null) {
-	// 		await goto('/');
-	// 		animateToBottom(null);
-	// 	} else {
-	// 		await goto(`/${sectionId}`);
-	// 		animateToTop(sectionId);
-	// 	}
-	// }
-
-	// IF WE CLICK THE SECTION NAME WE ARE ON, WE GO HOME
-
-	// async function navigateToSection(sectionId: string | null) {
-	// 	// If we're clicking the active section, treat it as going home
-	// 	if (sectionId === activeSection) {
-	// 		await goto('/');
-	// 		animateToBottom(null);
-	// 	} else {
-	// 		// Otherwise proceed with normal section navigation
-	// 		if (sectionId === null) {
-	// 			await goto('/');
-	// 			animateToBottom(null);
-	// 		} else {
-	// 			await goto(`/${sectionId}`);
-	// 			animateToTop(sectionId);
-	// 		}
-	// 	}
-	// }
-
-	// IF WE CLICK THE SECTION NAME WE ARE ON, WE GO UP A SECTION
 	async function navigateToSection(sectionId: string | null) {
-		// If we're clicking the active section, go up one
+		// If clicking current section, go up one
 		if (sectionId === activeSection) {
 			const previousSection = getNextSection('up');
 			if (previousSection) {
@@ -102,15 +96,16 @@
 				await goto('/');
 				animateToBottom(null);
 			}
-		} else {
-			// Normal navigation
-			if (sectionId === null) {
-				await goto('/');
-				animateToBottom(null);
-			} else {
-				await goto(`/${sectionId}`);
-				animateToTop(sectionId);
-			}
+		}
+		// If going to a new section
+		else if (sectionId !== null) {
+			await goto(`/${sectionId}`);
+			animateToTop(sectionId);
+		}
+		// If going home
+		else {
+			await goto('/');
+			animateToBottom(null);
 		}
 	}
 
@@ -123,7 +118,7 @@
 
 		const direction = event.deltaY > 0 ? 'down' : 'up';
 		const activeElement = activeSection
-			? document.querySelector(`#card-${activeSection} .card-content`)
+			? document.querySelector(`#section-${activeSection} .card-content`)
 			: null;
 
 		if (!activeElement) {
@@ -163,6 +158,10 @@
 		}
 	}
 
+	function handleResize() {
+		setImmediatePositions(activeSection);
+	}
+
 	function animateToTop(sectionId: string) {
 		if (isAnimating) return;
 		isAnimating = true;
@@ -174,70 +173,34 @@
 			}
 		});
 
-		// Animate sections to their new positions
+		const bottomPosition = mainContainer?.offsetHeight || 0;
+
 		sections.forEach((section, index) => {
-			// Nav button
-			const navEl = `#nav-${section.id}`;
-			// Content card
-			const cardEl = `#card-${section.id}`;
+			const sectionEl = `#section-${section.id}`;
 
 			if (index <= clickedIndex) {
 				// Move to top
 				tl.to(
-					navEl,
+					sectionEl,
 					{
+						// Add NAV_HEIGHT offset for the active section
 						y: index * NAV_HEIGHT,
-						duration: 0.5,
+						duration: ANIMATION_DURATION,
 						ease: 'power2.inOut'
 					},
-					'<'
+					'start'
 				);
-
-				// If it's the active card, slide it up to fill the screen
-				if (index === clickedIndex) {
-					tl.to(
-						cardEl,
-						{
-							y: 0,
-							duration: 0.5,
-							ease: 'power2.inOut'
-						},
-						'<'
-					);
-				} else {
-					// Stack other cards above
-					tl.to(
-						cardEl,
-						{
-							y: index * NAV_HEIGHT,
-							duration: 0.5,
-							ease: 'power2.inOut'
-						},
-						'<'
-					);
-				}
 			} else {
-				// Move to bottom
-				const bottomPosition = mainContainer.offsetHeight - (sections.length - index) * NAV_HEIGHT;
+				// Keep at bottom
+				const bottomY = bottomPosition - (sections.length - index) * NAV_HEIGHT;
 				tl.to(
-					navEl,
+					sectionEl,
 					{
-						y: bottomPosition,
-						duration: 0.5,
+						y: bottomY,
+						duration: ANIMATION_DURATION,
 						ease: 'power2.inOut'
 					},
-					'<'
-				);
-
-				// Keep cards below
-				tl.to(
-					cardEl,
-					{
-						y: '100vh',
-						duration: 0.5,
-						ease: 'power2.inOut'
-					},
-					'<'
+					'start'
 				);
 			}
 		});
@@ -257,52 +220,29 @@
 
 		const bottomPosition = mainContainer?.offsetHeight || 0;
 
-		if (!sectionId) {
-			// Going back to home
-			tl.to('.home-content', {
-				opacity: 1,
-				duration: 0.3,
-				ease: 'power2.inOut'
-			});
-		}
-
-		// Move all sections to bottom
 		sections.forEach((section, index) => {
 			const navYPosition = bottomPosition - (sections.length - index) * NAV_HEIGHT;
+			const sectionEl = `#section-${section.id}`;
 
-			// Move nav buttons
-			tl.to(
-				`#nav-${section.id}`,
-				{
-					y: navYPosition,
-					duration: 0.5,
-					ease: 'power2.inOut'
-				},
-				'<'
-			);
-
-			// Move cards
 			if (section.id === sectionId) {
-				// If this is the target section, bring it into view
 				tl.to(
-					`#card-${section.id}`,
+					sectionEl,
 					{
 						y: 0,
-						duration: 0.5,
+						duration: ANIMATION_DURATION,
 						ease: 'power2.inOut'
 					},
-					'<'
+					'start'
 				);
 			} else {
-				// Otherwise, move it out of view
 				tl.to(
-					`#card-${section.id}`,
+					sectionEl,
 					{
-						y: '100vh',
-						duration: 0.5,
+						y: navYPosition,
+						duration: ANIMATION_DURATION,
 						ease: 'power2.inOut'
 					},
-					'<'
+					'start'
 				);
 			}
 		});
@@ -311,39 +251,23 @@
 	}
 
 	onMount(() => {
+		loading = true;
 		const currentPath = $page.url.pathname;
-		const sectionId = currentPath.slice(1); // Remove leading slash
-
+		const sectionId = currentPath.slice(1);
+		// Set initial positions immediately without animation
 		if (sectionId && sections.some((s) => s.id === sectionId)) {
 			activeSection = sectionId;
-			animateToTop(sectionId);
+			setImmediatePositions(sectionId);
+		} else {
+			setImmediatePositions(null);
 		}
 
-		// Initialize home content to visible
-		const homeContent = document.querySelector('.home-content');
-		if (homeContent) {
-			gsap.set(homeContent, { opacity: 1 });
-		}
-
-		// Initialize positions
-		const bottomPosition = mainContainer?.offsetHeight || 0;
-		sections.forEach((section, index) => {
-			const navEl = document.getElementById(`nav-${section.id}`);
-			const cardEl = document.getElementById(`card-${section.id}`);
-			if (navEl) {
-				navEl.style.transform = `translateY(${
-					bottomPosition - (sections.length - index) * NAV_HEIGHT
-				}px)`;
-			}
-			if (cardEl) {
-				cardEl.style.transform = 'translateY(100vh)';
-			}
-		});
-
-		// Add wheel event listener
+		loading = false;
+		window.addEventListener('resize', handleResize);
 		mainContainer?.addEventListener('wheel', handleWheel, { passive: false });
 
 		return () => {
+			window.removeEventListener('resize', handleResize);
 			mainContainer?.removeEventListener('wheel', handleWheel);
 		};
 	});
@@ -365,35 +289,40 @@
 	<link rel="icon" type="image/png" href="/KeithDanielsonIcon.png" />
 </svelte:head>
 
-<div class="relative min-h-dvh bg-background" bind:this={mainContainer}>
+<div
+	class="relative min-h-dvh bg-background"
+	bind:this={mainContainer}
+	style="visibility: {loading ? 'hidden' : 'visible'}"
+>
 	<!-- Home Content -->
 	<div class="home-content">
 		<HomeContent />
 	</div>
 
-	<!-- Section Cards -->
+	<!-- Combined Section Elements -->
 	{#each sections as section, index}
 		<div
-			id="card-{section.id}"
-			class="absolute inset-x-0 min-h-screen {section.color} transform"
-			style="transform: translateY(100vh);"
+			id="section-{section.id}"
+			class="absolute inset-x-0"
+			style="transform: translateY({index * NAV_HEIGHT}px);"
 		>
-			<div class="card-content" style="padding-top: {(index + 1) * 48}px;">
-				<svelte:component this={section.content} />
+			<!-- Nav part -->
+			<div class="w-full {section.color} z-10">
+				<div class="p-3">
+					<button
+						class="block w-full text-left font-secondary text-background"
+						on:click={() => navigateToSection(section.id)}
+					>
+						{section.name}
+					</button>
+				</div>
 			</div>
-		</div>
-	{/each}
 
-	<!-- Navigation Items -->
-	{#each sections as section}
-		<div id="nav-{section.id}" class="absolute left-0 w-full {section.color} z-10">
-			<div class="p-3">
-				<button
-					class="block w-full text-left font-secondary text-background"
-					on:click={() => navigateToSection(section.id)}
-				>
-					{section.name}
-				</button>
+			<!-- Content part -->
+			<div class="min-h-screen {section.color}">
+				<div class="card-content" style="padding-top: {NAV_HEIGHT}px;">
+					<svelte:component this={section.content} />
+				</div>
 			</div>
 		</div>
 	{/each}
@@ -408,7 +337,6 @@
 		max-height: calc(100dvh - 48px);
 		height: calc(100dvh - 48px);
 		overflow-y: auto;
-		/* Add padding to ensure content is reachable */
 		padding-bottom: max(env(safe-area-inset-bottom), 24px);
 	}
 </style>
