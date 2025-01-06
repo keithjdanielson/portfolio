@@ -1,4 +1,4 @@
-export function load({ url }) {
+export function load() {
 	// Add cache headers for static assets
 	return {
 		headers: {
