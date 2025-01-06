@@ -1,5 +1,5 @@
 <script>
-	import ComputerSvg from '../assets/ComputerSVG.svelte';
+	import ComputerSvg from './ComputerSVG.svelte';
 </script>
 
 <main class="home-content absolute inset-0">

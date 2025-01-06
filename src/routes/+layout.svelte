@@ -4,7 +4,7 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import gsap from 'gsap';
-	import HomeContent from '../content/HomeContent.svelte';
+	import HomeContent from '../content/Home/HomeContent.svelte';
 	import AboutContent from '../content/AboutContent.svelte';
 	import WorkContent from '../content/WorkContent.svelte';
 	import ProjectsContent from '../content/ProjectsContent.svelte';
