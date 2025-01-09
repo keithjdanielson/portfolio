@@ -3,7 +3,7 @@
 	import skills from '$lib/data/skills';
 </script>
 
-<div class="flex lg:pl-12">
+<div class="inset-0 flex">
 	<div class="xl:max-w-8xl mx-auto grid gap-8">
 		<div class="flex">
 			<div class="sm:flex sm:w-32 sm:items-center sm:justify-center">
@@ -22,12 +22,12 @@
 						</div>
 						<div class="flex-1">
 							<div class="px-4 pb-0 sm:px-5 sm:pt-5">
-								<span class="font-secondary text-xl font-semibold lg:text-2xl">
+								<span class="font-secondary text-2xl font-semibold lg:text-2xl">
 									{job.position.toUpperCase()} - {job.company}
 								</span>
 							</div>
 							<div class="px-4 pb-0 sm:px-5 sm:pt-5">
-								<ul class="space-y-2 font-secondary text-lg md:text-xl xl:max-w-5xl">
+								<ul class="space-y-2 font-secondary text-xl md:text-xl xl:max-w-5xl">
 									{#each job.achievements as achievement}
 										<li>{achievement}</li>
 									{/each}
@@ -54,7 +54,7 @@
 					>Skills</span
 				>
 			</div>
-			<div class="pb-12 sm:pl-8 xl:max-w-7xl xl:pb-0">
+			<div class="sm:pb-12 sm:pl-8 xl:max-w-7xl xl:pb-0">
 				<div class="grid grid-cols-1 xl:grid-cols-2 xl:gap-6">
 					{#each Object.entries(skills) as [category, skillList]}
 						<div class="bg-background p-4 xl:rounded-lg">

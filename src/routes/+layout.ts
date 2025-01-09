@@ -20,7 +20,8 @@ export const load = async ({ url }) => {
 			{
 				id: 'projects',
 				name: 'Projects',
-				color: 'bg-three'
+				color: 'bg-three',
+				mobileColor: 'bg-two'
 			},
 			{
 				id: 'contact',
