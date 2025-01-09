@@ -295,20 +295,28 @@
 			<div class="w-full {section.color} z-10">
 				<div class="p-3">
 					<button
+						id="tab-{section.id}"
+						tabindex={0}
 						class="block text-left font-secondary text-background focus:text-white focus:outline-none focus:ring-2 focus:ring-background/50"
-						tabindex={index + 1}
 						on:click={() => navigateToSection(section.id)}
+						aria-controls="content-{section.id}"
+						aria-expanded={activeSection === section.id}
+						aria-selected={activeSection === section.id}
+						role="tab"
 					>
 						{section.name}
 					</button>
 				</div>
 			</div>
-
 			<!-- Content part -->
 			<div class={section.color}>
 				<div
+					id="content-{section.id}"
 					class="card-content overflow-y-auto"
 					style="height: calc(100dvh - {NAV_HEIGHT * sections.length}px);"
+					role="tabpanel"
+					aria-labelledby="tab-{section.id}"
+					inert={!activeSection || activeSection !== section.id}
 				>
 					<svelte:component this={section.content} />
 				</div>
