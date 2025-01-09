@@ -84,7 +84,9 @@
 				<p class="text-background transition-colors duration-200 hover:text-white sm:w-1/2">
 					I LOVE TO MAKE <strong class="text-white">STUFF</strong>. BEYOND CODING, I'M PASSIONATE
 					ABOUT SYNTHESIZERS, WOODWORK, AND FASHION. <br /> YOU CAN CHECK OUT SOME OF MY MUSIC
-					<strong class="text-white underline hover:opacity-90">
+					<strong
+						class="text-white underline hover:opacity-90 focus:text-white focus:outline-none focus:ring-2 focus:ring-background/50"
+					>
 						<a
 							href="https://soundcloud.com/nodoutmusic/tracks"
 							target="_blank"
@@ -97,7 +99,7 @@
 					<a
 						href="/Keith_Danielson_Resume.pdf"
 						download="Keith_Danielson_Resume.pdf"
-						class="w-1/2 text-left underline transition-colors duration-200 hover:opacity-90"
+						class="w-1/2 text-left underline transition-colors duration-200 hover:opacity-90 focus:text-white focus:outline-none focus:ring-2 focus:ring-background/50"
 					>
 						MY RESUME
 					</a>

@@ -9,15 +9,10 @@
 	>
 		{#each projects as project}
 			<li class="relative bg-two px-4 sm:rounded-lg sm:p-8">
-				<h3 class="flex justify-between pb-2 font-headers text-2xl text-background sm:text-4xl">
-					<a
-						href={project.url}
-						target="_blank"
-						rel="noopener noreferrer"
-						on:click={(e) => {
-							console.log('URL:', project.url);
-						}}
-					>
+				<h3
+					class="flex justify-between pb-2 font-headers text-2xl text-background focus:text-white focus:outline-none focus:ring-2 focus:ring-background/50 sm:text-4xl"
+				>
+					<a href={project.url} target="_blank" rel="noopener noreferrer">
 						<span>{project.name}</span>
 					</a>
 					<span class="font-light">{project.date}</span>
@@ -25,14 +20,7 @@
 				<div
 					class="group overflow-hidden rounded-lg focus-within:ring-2 focus-within:ring-background focus-within:ring-offset-2 focus-within:ring-offset-gray-100"
 				>
-					<a
-						href={project.url}
-						target="_blank"
-						rel="noopener noreferrer"
-						on:click={(e) => {
-							console.log('URL:', project.url);
-						}}
-					>
+					<a href={project.url} target="_blank" rel="noopener noreferrer">
 						<img
 							src={project.imagePath}
 							alt=""

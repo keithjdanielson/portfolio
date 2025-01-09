@@ -295,7 +295,8 @@
 			<div class="w-full {section.color} z-10">
 				<div class="p-3">
 					<button
-						class="block w-full text-left font-secondary text-background"
+						class="block text-left font-secondary text-background focus:text-white focus:outline-none focus:ring-2 focus:ring-background/50"
+						tabindex={index + 1}
 						on:click={() => navigateToSection(section.id)}
 					>
 						{section.name}
