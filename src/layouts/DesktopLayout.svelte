@@ -297,7 +297,7 @@
 					<button
 						id="tab-{section.id}"
 						tabindex={0}
-						class="block text-left font-secondary text-background focus:text-white focus:outline-none focus:ring-2 focus:ring-background/50"
+						class="block w-full text-left font-secondary text-background focus:text-white focus:outline-none focus:ring-2 focus:ring-background/50"
 						on:click={() => navigateToSection(section.id)}
 						aria-controls="content-{section.id}"
 						aria-expanded={activeSection === section.id}
